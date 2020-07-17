@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Surf_blog.DAL;
-
+using Surf_blog.Models.ViewModels;
 
 namespace Surf_blog.Controllers
 {
@@ -17,32 +18,34 @@ namespace Surf_blog.Controllers
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult Login(LoginViewModel model)
         {
-            ViewBag.Message = "Your application description page.";
+            if (ModelState.IsValid)
+            {
+                var userInDb = dBContext.Users.FirstOrDefault(c => c.Nickname == model.Nickname && c.Password == model.Password);
+                if (userInDb != null)
+                {
+                    FormsAuthentication.SetAuthCookie(userInDb.Nickname, model.RememberMe);
+                    Session["UserId"] = userInDb.Id.ToString();
+                    Session["Nickname"] = userInDb.Nickname.ToString();
+                    Session["Photo"] = userInDb.Photo.ToString();
 
-            return View();
+                    return RedirectToAction("Index", "Feed");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Неверный псевдоним или пароль");
+                }
+            }
+            return View("Index", model);
         }
 
-        public ActionResult Contact()
+        public ActionResult Logout()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        public ActionResult BoardSelling()
-        {
-            ViewBag.Message = "Serfing club sells boards.";
-
-            ViewBag.Ads = "Sells";
-
-            ViewBag.Prices = new[] { 100, 120, 140, 90 };
-
-            var user = dBContext.Users.FirstOrDefault();
-            ViewBag.Seller = user;
-
-            return View(user);
+            FormsAuthentication.SignOut();
+            Request.Cookies.Clear();
+            return RedirectToAction("Index", "Feed");
         }
     }
 }

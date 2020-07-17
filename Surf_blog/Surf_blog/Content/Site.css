@@ -34,3 +34,7 @@ textarea {
 .redtext {
     color:red;
 }
+
+label {
+    width:100%;
+}
