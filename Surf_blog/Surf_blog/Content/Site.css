@@ -23,18 +23,35 @@ textarea {
     max-width: 280px;
 }
 
-.surfheadding {
-    background-color: #c7d2d9;
-}
-
-.price {
-    font-style:italic;
-}
-
-.redtext {
-    color:red;
-}
-
 label {
-    width:100%;
+    width: 100%;
+}
+
+.panel > .panel-heading {
+    background-color: #dce4e9;
+}
+
+.header-color {
+    background-color : #c7d2d9;
+}
+
+.surfcolor {
+    background-color: #dce4e9;
+}
+
+.post-panel {
+    width : 859px;
+}
+
+.post-img {
+    max-width :857px;
+}
+
+.panel-body {
+    padding-left : 0;
+}
+
+.logo {
+    font-family: 'Faster One', cursive;
+    font-size: 36px;
 }

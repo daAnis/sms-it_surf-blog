@@ -11,7 +11,7 @@
     {
         <form>
 
-            <div class="panel panel-info">
+            <div class="panel panel-default post-panel">
                 <div class="panel-heading">
                     Добавление новой записи
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
                     <input name="imageData" type="file" accept="image/jpeg" />
 
 
-                    <button type="submit" class="btn">Добавить</button>
+                    <button type="submit" class="btn pull-right surfcolor">Добавить</button>
 
                 </div>
             </div>
@@ -39,7 +39,7 @@
 
 @foreach (var post in ViewBag.Posts)
 {
-    <div class="panel panel-info">
+    <div class="panel panel-default post-panel">
         <div class="panel-heading">
             @post.Author.Photo
             @post.Author.Nickname
@@ -52,8 +52,9 @@
             @if (@post.Photo != Guid.Empty)
             {
                 var url = string.Format("~/Content/Images/Uploads/{0}.jpg", @post.Photo.ToString());
-                <img src=@Url.Content(url) />
+                <img src=@Url.Content(url) class="post-img" />
             }
         </div>
+        <div class="panel-footer surfcolor"></div>
     </div>
 }
