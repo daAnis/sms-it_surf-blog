@@ -7,7 +7,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top : 30px;
+    padding-top: 30px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -24,6 +24,7 @@ textarea,
 label,
 button,
 p,
+.btn-default,
 .navbar .container .navbar-collapse a {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
@@ -50,15 +51,18 @@ label {
 }
 
 .navbar .container .navbar-collapse .navbar-text,
-.black-label{
+.black-label {
     font-size: 16px;
     color: #000000;
 }
 
-button {
-    max-width: 195px;
+.btn,
+.btn-default {
+    max-width: 217px;
+    min-width: 151px;
     background-color: #dce4e9;
     color: #818283;
+    border: 1px solid #AABACC;
 }
 
 .panel {
@@ -80,24 +84,30 @@ button {
     font-size: 36px;
 }
 
-
 .navbar-collapse li {
     border-right: 1px solid #AABACC;
 }
-
 
 .navbar-collapse li:last-child {
     border-right: none;
 }
 
 .navbar {
-    border-bottom : none;
+    border-bottom: none;
 }
 
 .tiny-panel {
-    width : 269px;
+    width: 269px;
 }
 
 .large-panel {
-    width : 731px;
+    width: 731px;
+}
+
+.field-validation-error {
+    color: #DD3333;
+}
+
+.input-validation-error {
+    border: 1px solid #DD3333;
 }

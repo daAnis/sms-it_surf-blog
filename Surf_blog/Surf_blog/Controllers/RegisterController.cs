@@ -25,13 +25,20 @@ namespace Surf_blog.Controllers
             {
                 if(model.Password != model.PasswordConfirm)
                 {
-                    ModelState.AddModelError(string.Empty, "Введенные пароль не совпадают");
+                    ModelState.AddModelError(string.Empty, "Пароли не совпадают");
                     return View("Index", model);
                 }
                 var userInDb = dBContext.Users.FirstOrDefault(c => c.Nickname == model.Nickname);
                 if (userInDb != null)
                 {
-                    ModelState.AddModelError(string.Empty, "Пользователь с таким псевдонимом уже существует!");
+                    ModelState.AddModelError(string.Empty, "Такой псевдоним уже занят");
+                    return View("Index", model);
+                }
+                userInDb = null;
+                userInDb = dBContext.Users.FirstOrDefault(c => c.Email == model.Email);
+                if (userInDb != null)
+                {
+                    ModelState.AddModelError(string.Empty, "Такая почта уже зарегистрированна");
                     return View("Index", model);
                 }
                 if(imageData != null)

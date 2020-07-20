@@ -17,7 +17,7 @@ namespace Surf_blog.Models.DBModels
         public string Nickname { get; set; }
 
         [Display(Name = "Почта")]
-        [Required(ErrorMessage = "Эп обязательна")]
+        [Required(ErrorMessage = "Э/п обязательна")]
         [EmailAddress(ErrorMessage = "Неверно указан адрес")]
         public string Email { get; set; }
 

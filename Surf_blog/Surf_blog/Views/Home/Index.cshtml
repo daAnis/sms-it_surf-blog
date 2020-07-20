@@ -26,12 +26,14 @@
                 <div>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 </div>
-                <button type="submit" class="btn">Войти</button>
+                <div class="col-sm-6 col-sm-offset-2">
+                    <button type="submit" class="btn btn-default">Войти</button>
+                </div>
             </div>
         </div>
         <div>
             <label>Нет аккаунта?</label>
-            <button type="submit" class="btn">Зарегистрироваться</button>
+            <a href="@Url.Action("Index","Register")" class="btn btn-default" role="button">Зарегистрироваться</a>
         </div>
     </div>
 }
