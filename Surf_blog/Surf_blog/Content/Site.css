@@ -7,6 +7,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top : 30px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -19,39 +20,84 @@
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
-textarea {
-    max-width: 280px;
+textarea,
+label,
+button,
+p,
+.navbar .container .navbar-collapse a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #000000;
 }
 
-label {
+textarea,
+.post-img {
     width: 100%;
 }
 
-.panel > .panel-heading {
+label {
+    font-size: 13px;
+    color: #6C757D;
+}
+
+.remember-label {
+    width: 50%;
+}
+
+.date-label {
+    font-size: 11px;
+    color: #757575;
+}
+
+.navbar .container .navbar-collapse .navbar-text,
+.black-label{
+    font-size: 16px;
+    color: #000000;
+}
+
+button {
+    max-width: 195px;
+    background-color: #dce4e9;
+    color: #818283;
+}
+
+.panel {
+    width: 859px;
+}
+
+.panel > .panel-heading,
+.panel > .panel-footer {
     background-color: #dce4e9;
 }
 
 .header-color {
-    background-color : #c7d2d9;
+    background-color: #c7d2d9;
 }
 
-.surfcolor {
-    background-color: #dce4e9;
-}
-
-.post-panel {
-    width : 859px;
-}
-
-.post-img {
-    max-width :857px;
-}
-
-.panel-body {
-    padding-left : 0;
-}
-
-.logo {
+.navbar .container .navbar-header a {
+    color: #ffffff;
     font-family: 'Faster One', cursive;
     font-size: 36px;
+}
+
+
+.navbar-collapse li {
+    border-right: 1px solid #AABACC;
+}
+
+
+.navbar-collapse li:last-child {
+    border-right: none;
+}
+
+.navbar {
+    border-bottom : none;
+}
+
+.tiny-panel {
+    width : 269px;
+}
+
+.large-panel {
+    width : 731px;
 }

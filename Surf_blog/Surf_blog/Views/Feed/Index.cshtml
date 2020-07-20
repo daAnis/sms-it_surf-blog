@@ -1,7 +1,7 @@
 ﻿@using Surf_blog.Models.DBModels
 @model Surf_blog.Models.DBModels.Post
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Клуб любителей серфинга - лента новостей";
 }
 
 @if (Session["UserId"] != null)
@@ -9,52 +9,53 @@
 
     using (Html.BeginForm("AddPost", "Feed", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <form>
-
-            <div class="panel panel-default post-panel">
-                <div class="panel-heading">
-                    Добавление новой записи
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                </div>
-                <div class="panel-body">
-                    @Html.LabelFor(model => model.Text)
-                    @Html.TextAreaFor(model => model.Text, 10, 100, new { htmlAttributes = new { @class = "form-control" } })
-
-                    @Html.LabelFor(model => model.Photo)
-                    <input name="imageData" type="file" accept="image/jpeg" />
-
-
-                    <button type="submit" class="btn pull-right surfcolor">Добавить</button>
-
-                </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <label>Добавление новой записи</label>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             </div>
-
-
-
-        </form>
-
+            <div class="panel-body">
+                @Html.LabelFor(model => model.Text)
+                @Html.TextAreaFor(model => model.Text, 5, 100, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.LabelFor(model => model.Photo)
+                <input name="imageData" type="file" accept="image/jpeg" />
+                <button type="submit" class="btn pull-right">Добавить</button>
+            </div>
+        </div>
     }
 }
 
-
 @foreach (var post in ViewBag.Posts)
 {
-    <div class="panel panel-default post-panel">
+    <div class="panel panel-default">
         <div class="panel-heading">
-            @post.Author.Photo
-            @post.Author.Nickname
-            <br>
-            @post.PublishDate
+            <div class="row">
+                @{
+                    var photoUrl = Surf_blog.Helpers.ImageUrlHelper.GetUrl(post.Author.Photo);
+                    if (photoUrl != null)
+                    {
+                        <div class="col-xs-1">
+                            <img class="img-circle" src="@Url.Content(photoUrl)" height="37" width="37" />
+                        </div>
+                    }
+                }
+                <div class="col-xs-11">
+                    <label class="black-label">@post.Author.Nickname</label>
+                    <br>
+                    <label class="date-label">@post.PublishDate</label>
+                </div>
+            </div>
         </div>
         <div class="panel-body">
             <p>@post.Text</p>
-
-            @if (@post.Photo != Guid.Empty)
-            {
-                var url = string.Format("~/Content/Images/Uploads/{0}.jpg", @post.Photo.ToString());
-                <img src=@Url.Content(url) class="post-img" />
+            @{
+                var postPhotoUrl = Surf_blog.Helpers.ImageUrlHelper.GetUrl(post.Photo);
+                if (postPhotoUrl != null)
+                {
+                    <img class="post-img" src="@Url.Content(postPhotoUrl)" />
+                }
             }
         </div>
-        <div class="panel-footer surfcolor"></div>
+        <div class="panel-footer"></div>
     </div>
 }
