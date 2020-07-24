@@ -42,6 +42,12 @@ namespace Surf_blog.Controllers
             var userId = Convert.ToInt32(Session["UserId"]);
             var userInDb = dBContext.Users.FirstOrDefault(c => c.Id == userId);
 
+            if(userInDb == null)
+            {
+                TempData["errorMessage"] = "Время сессии истекло. Авторизуйтесь повторно.";
+                return RedirectToAction("Index", "Home");
+            }
+
             model.Author = userInDb;
 
             dBContext.Posts.Add(model);

@@ -31,9 +31,14 @@ p,
     color: #000000;
 }
 
-textarea,
-.post-img {
+textarea {
     width: 100%;
+    border: 1px solid #CED4DA;
+    border-radius: 5px;
+}
+
+.post-img {
+    max-width: 100%;
 }
 
 label {

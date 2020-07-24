@@ -16,6 +16,10 @@ namespace Surf_blog.Controllers
 
         public ActionResult Index()
         {
+            if(TempData["errorMessage"] != null)
+            {
+                ViewBag.Message = TempData["errorMessage"].ToString();
+            }
             return View();
         }
 
