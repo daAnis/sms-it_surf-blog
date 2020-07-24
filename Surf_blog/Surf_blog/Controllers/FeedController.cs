@@ -24,7 +24,13 @@ namespace Surf_blog.Controllers
         [HttpPost]
         public ActionResult AddPost(Post model, HttpPostedFileBase imageData)
         {
-            if (imageData == null && model.Text == null)
+            if (!ModelState.IsValid)
+            {
+                var posts1 = dBContext.Posts.OrderByDescending(c => c.Id).ToList();
+                ViewBag.Posts = posts1;
+                return View("Index", model);
+            }
+                if (imageData == null && model.Text == null)
             {
                 ModelState.AddModelError(string.Empty, "Не загружено изображение или отсутствует текст");
                 var posts1 = dBContext.Posts.OrderByDescending(c => c.Id).ToList();

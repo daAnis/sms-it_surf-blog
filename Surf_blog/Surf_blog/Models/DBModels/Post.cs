@@ -11,7 +11,7 @@ namespace Surf_blog.Models.DBModels
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Введите текст"), MaxLength(4095)]
+        [Display(Name = "Введите текст"), MaxLength(4095, ErrorMessage = "Максимальное количество символов 4095")]
         public string Text { get; set; }
 
         [Display(Name = "Прикрепить изображение")]

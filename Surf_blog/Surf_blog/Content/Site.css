@@ -116,3 +116,9 @@ label {
 .input-validation-error {
     border: 1px solid #DD3333;
 }
+
+.wrap {
+    word-break : break-all;
+    white-space: normal;
+    word-wrap: break-word;
+}

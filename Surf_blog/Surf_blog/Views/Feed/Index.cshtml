@@ -15,6 +15,8 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             </div>
             <div class="panel-body">
+                @Html.ValidationMessageFor(model => model.Text)
+                <br />
                 @Html.LabelFor(model => model.Text)
                 @Html.TextAreaFor(model => model.Text, 5, 100, new { htmlAttributes = new { @class = "form-control rounded" } })
                 @Html.LabelFor(model => model.Photo)
@@ -47,7 +49,7 @@
             </div>
         </div>
         <div class="panel-body">
-            <p>@post.Text</p>
+            <p class="wrap">@post.Text</p>
             @{
                 var postPhotoUrl = Surf_blog.Helpers.ImageUrlHelper.GetUrl(post.Photo);
                 if (postPhotoUrl != null)
