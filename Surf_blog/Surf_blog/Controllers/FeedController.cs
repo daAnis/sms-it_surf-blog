@@ -60,6 +60,9 @@ namespace Surf_blog.Controllers
             dBContext.SaveChanges();
             var posts = dBContext.Posts.OrderByDescending(c => c.Id).ToList();
             ViewBag.Posts = posts;
+
+            ModelState.Clear();
+
             return View("Index");
         }
     }
