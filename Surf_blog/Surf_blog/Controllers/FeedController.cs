@@ -30,7 +30,7 @@ namespace Surf_blog.Controllers
                 ViewBag.Posts = posts1;
                 return View("Index", model);
             }
-                if (imageData == null && model.Text == null)
+            if (imageData == null && model.Text == null)
             {
                 ModelState.AddModelError(string.Empty, "Не загружено изображение или отсутствует текст");
                 var posts1 = dBContext.Posts.OrderByDescending(c => c.Id).ToList();
@@ -42,13 +42,20 @@ namespace Surf_blog.Controllers
 
             if (imageData != null)
             {
+                if (!ImageFormatHelper.IsJpg(imageData))
+                {
+                    ModelState.AddModelError(string.Empty, "Загруженное изображение не jpeg");
+                    var posts1 = dBContext.Posts.OrderByDescending(c => c.Id).ToList();
+                    ViewBag.Posts = posts1;
+                    return View("Index", model);
+                }
                 model.Photo = ImageSaveHelper.SaveImage(imageData);
             }
 
             var userId = Convert.ToInt32(Session["UserId"]);
             var userInDb = dBContext.Users.FirstOrDefault(c => c.Id == userId);
 
-            if(userInDb == null)
+            if (userInDb == null)
             {
                 TempData["errorMessage"] = "Время сессии истекло. Авторизуйтесь повторно.";
                 return RedirectToAction("Index", "Home");

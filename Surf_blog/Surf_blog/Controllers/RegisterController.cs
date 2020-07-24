@@ -13,7 +13,7 @@ namespace Surf_blog.Controllers
     public class RegisterController : Controller
     {
         SurfDBContext dBContext = new SurfDBContext();
-        
+
         public ActionResult Index()
         {
             return View();
@@ -21,9 +21,9 @@ namespace Surf_blog.Controllers
 
         public ActionResult Register(User model, HttpPostedFileBase imageData)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                if(model.Password != model.PasswordConfirm)
+                if (model.Password != model.PasswordConfirm)
                 {
                     ModelState.AddModelError(string.Empty, "Пароли не совпадают");
                     return View("Index", model);
@@ -41,8 +41,13 @@ namespace Surf_blog.Controllers
                     ModelState.AddModelError(string.Empty, "Такая почта уже зарегистрированна");
                     return View("Index", model);
                 }
-                if(imageData != null)
+                if (imageData != null)
                 {
+                    if (!ImageFormatHelper.IsJpg(imageData))
+                    {
+                        ModelState.AddModelError(string.Empty, "Загруженное изображение не jpeg");
+                        return View("Index", model);
+                    }
                     model.Photo = ImageSaveHelper.SaveImage(imageData);
                 }
                 dBContext.Users.Add(model);
